@@ -45,13 +45,9 @@ A short video demonstration of the application will be added here.
 See `requirements.txt` for the Python dependencies. The trained model files must be available in their expected locations for the application to run.
 
 
+## Project Demo
 
-\## Project Demo
-
-
-
-\[Watch the 20-second demo](demo/emotion-detection-demo.mp4)
-
+[▶ Watch the 20-second demo](demo/emotion-detection-demo.mp4)
 
 
 
