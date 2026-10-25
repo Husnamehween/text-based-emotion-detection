@@ -45,9 +45,15 @@ A short video demonstration of the application will be added here.
 See `requirements.txt` for the Python dependencies. The trained model files must be available in their expected locations for the application to run.
 
 
-## Project Demo
+## 🎥 Project Demo
 
-[▶ Watch the 20-second demo](demo/emotion-detection-demo.mp4)
+Watch a short demonstration of the Text-Based Emotion Detection application.
+
+▶️ **[Watch the Demo on YouTube](https://youtu.be/QFmoRpTGj_8)**
+
+The application compares three models — Naive Bayes, LSTM, and fine-tuned RoBERTa — for classifying text into six emotion categories.
+
+
 
 
 
