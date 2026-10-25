@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Detection - Model Comparison</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #1e9e5b;
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 25px;
+        }
+
+        .btn-primary {
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 45px 20px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 1000px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-family: inherit;
+            font-size: 16px;
+            resize: vertical;
+            margin-bottom: 20px;
+        }
+
+        .results {
+            margin-top: 30px;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .result-card {
+            background-color: #f8fbf9;
+            border: 1px solid #e0e9e3;
+            border-radius: 12px;
+            padding: 25px 15px;
+        }
+
+        .result-card h3 {
+            color: #1e9e5b;
+            margin-top: 0;
+        }
+
+        .emotion {
+            font-size: 22px;
+            font-weight: bold;
+            text-transform: capitalize;
+            margin: 15px 0;
+        }
+
+        .confidence {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .pending {
+            color: #888;
+            font-style: italic;
+        }
+
+        .input-label {
+            display: block;
+            text-align: left;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 700px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .card {
+                padding: 25px 18px;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Text-Based Emotion Detection</h1>
+        <a href="{% url 'index' %}" class="btn-primary">Home</a>
+    </header>
+
+    <main>
+        <div class="card">
+            <h2>Compare Emotion Detection Models</h2>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <label class="input-label" for="tweets">
+                    Enter your text
+                </label>
+
+                <textarea
+                    id="tweets"
+                    name="tweets"
+                    rows="4"
+                    placeholder="Enter your text here..."
+                    required
+                >{{ text|default:"" }}</textarea>
+
+                <button type="submit" class="btn-primary">
+                    Compare Emotions
+                </button>
+            </form>
+
+            {% if text %}
+                <div class="results">
+                    <h2>Prediction Results</h2>
+                    <p><strong>Your text:</strong> {{ text }}</p>
+
+                    <div class="results-grid">
+                        <div class="result-card">
+                            <h3>Naive Bayes</h3>
+                            <p class="emotion">
+                                {{ nb_emotion|default:"Not available" }}
+                            </p>
+                            <p class="confidence">
+                                TF-IDF + Machine Learning
+                            </p>
+                        </div>
+
+                        <div class="result-card">
+                            <h3>LSTM</h3>
+                            <p class="emotion">
+                                {{ lstm_result.emotion|default:"Not available" }}
+                            </p>
+                            <p class="confidence">
+                                {% if lstm_result.confidence != None %}
+                                    Confidence: {{ lstm_result.confidence }}%
+                                {% endif %}
+                            </p>
+                        </div>
+
+                      
+<div class="result-card">
+    <h3>RoBERTa</h3>
+    <p class="emotion">
+        {{ roberta_result.emotion|default:"Not available" }}
+    </p>
+    <p class="confidence">
+        {% if roberta_result.confidence != None %}
+            Confidence: {{ roberta_result.confidence }}%
+        {% endif %}
+    </p>
+    <p class="confidence">
+        Fine-tuned Transformer model
+    </p>
+</div>
+
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+</body>
+</html>
+

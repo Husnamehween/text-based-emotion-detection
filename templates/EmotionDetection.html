@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Emotion Detection</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #1e9e5b;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            padding-left: 30px;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .card {
+            background-color: white;
+            padding: 40px 60px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            resize: vertical;
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333333;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Text-Based Emotion Detection</h1>
+      <span style="margin-left:80vw"><a href="{% url 'index' %}">
+            <button class="btn-primary btn-home">Home</button>
+        </a></span>
+</header>
+
+<main>
+    <div class="card">
+        <!-- Home Button -->
+      
+
+        <h2>Detect Emotion from Text</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <textarea name="user_text" rows="4" placeholder="Enter your text here">{{ user_text }}</textarea>
+            <br>
+            <button type="submit" class="btn-primary">Detect Emotion</button>
+        </form>
+
+        {% if emotion %}
+            <div class="result">
+                Predicted Emotion: {{ emotion }}
+            </div>
+        {% endif %}
+    </div>
+</main>
+
+</body>
+</html>

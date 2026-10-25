@@ -1,0 +1,31 @@
+{%extends 'users/userbase.html'%}
+{%load static%}
+{%block contents%}
+
+
+
+
+    <section class="about full-screen d-lg-flex justify-content-center align-items-center" id="about">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-7 col-md-12 col-12 d-flex align-items-center">
+                    
+                    <table class="table">  
+                            <td>accuracy</td>
+                            <td>: {{acc}}</td>
+                        </tr>                       
+                    </table>
+                    {{nb|safe}}
+                </div>
+
+                <div class="col-lg-5 col-md-12 col-12">
+                   
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+{%endblock%}

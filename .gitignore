@@ -1,0 +1,30 @@
+# Python generated files
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+
+# Local database and secrets
+db.sqlite3
+.env
+
+# Logs and training checkpoints
+logs/
+roberta_training_checkpoints/
+
+# Large model and datasets excluded from initial upload
+media/tweet_emotions.csv
+media/fine_tuned_roberta/
+media/balanced_data.csv
+
+test_predictions.csv
+training_args.bin
+
+# Temporary testing and backup scripts
+newroberta_finetuning_backup.py
+newroberta_finetuning_backup_before_ru*.py
+recover_lstm_tokenizer.py
+test_lstm.py
+roberta_finetuning.py
